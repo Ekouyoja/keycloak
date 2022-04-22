@@ -1,0 +1,34 @@
+[Unit]
+Description=Keycloak Server
+After=network.target
+
+[Service]
+Type=idle
+EnvironmentFile=/app/keycloak/latest/conf/javaopts.conf
+User=keycloak
+Group=keycloak
+ExecStart=/app/keycloak/latest/bin/kc.sh start --auto-build
+
+StandardOutput=null
+
+NoNewPrivileges=true
+LockPersonality=true
+PrivateDevices=true
+PrivateTmp=true
+PrivateUsers=true
+
+ProtectControlGroups=true
+ProtectHome=true
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectSystem=full
+
+RestrictAddressFamilies=AF_UNIX AF_INET
+RestrictNamespaces=true
+RestrictRealtime=true
+RestrictSUIDSGID=true
+
+ReadWriteDirectories=/your_install_keycloak_directory
+
+[Install]
+WantedBy=multi-user.target
